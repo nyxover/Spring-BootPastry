@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+
+
+<form action="#" th:action="@{/add}" th:object="${pastry}" method="post" >
+<div class="mb-3">
+    <label for="nameInput">name</label>
+    <input id="nameInput" type="text" th:field="*{name}">
+</div>
+    <div class="mb-3">
+        <label for="descriptionInput">Description</label>
+        <input id="descriptionInput" type="text" th:field="*{description}">
+    </div>
+    <div class="mb-3">
+        <input type="submit" value="Add">
+    </div>
+
+
+
+
+</form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
