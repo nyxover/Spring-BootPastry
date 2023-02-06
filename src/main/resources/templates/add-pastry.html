@@ -11,7 +11,7 @@
         <div class="col-md-4">
 
 
-<form action="#" th:action="@{/add}" th:object="${pastry}" method="post" >
+<form action="#" th:action="@{/pastries/add}" th:object="${pastry}" method="post" >
 <div class="mb-3">
     <label for="nameInput">name</label>
     <input id="nameInput" type="text" th:field="*{name}">
@@ -23,11 +23,12 @@
     <div class="mb-3">
         <input type="submit" value="Add">
     </div>
-
-
-
-
 </form>
+            <nav>
+                <a th:href="@{/pastries/all}">Home</a>
+                <a th:href="@{/pastries/add}">Add Pastry</a>
+
+            </nav>
 
         </div>
     </div>

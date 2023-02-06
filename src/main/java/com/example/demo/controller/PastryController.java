@@ -2,24 +2,37 @@ package com.example.demo.controller;
 
 import com.example.demo.repository.PastryRepository;
 import com.example.demo.repository.entity.Pastry;
+import com.example.demo.service.PastryService;
+import com.example.demo.service.dto.PastryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
+@RequestMapping("/pastries")
 public class PastryController {
     @Autowired
-    private PastryRepository pastryRepository;
+    private PastryService pastryService;
     @GetMapping("/all")
-    public String displayAllPastry(Model model) {
-        List<Pastry> pastryList = (List<Pastry>) pastryRepository.findAll();
+    public String displayAllPastries(Model model) {
+        List<PastryDto> pastryList = pastryService.fetchPastries();
         model.addAttribute("pastries", pastryList);
         return "home.html";
+    }
+
+    @GetMapping("/{id}")
+    public  String displaySpecificPastry(@PathVariable Long id, Model model){
+        Optional<PastryDto> pastryOptional = pastryService.fetchById(id);
+        if (pastryOptional.isPresent()){
+            model.addAttribute("pastry", pastryOptional.get());
+            return "pastry-details.html";
+        } else {
+            return "404.html";
+        }
     }
     @GetMapping ("/add")
     public String displayAddPastryForm(Model model) {
@@ -39,7 +52,7 @@ public class PastryController {
     }*/
     @PostMapping("/add")
     public String addPastryFormSubmission(Pastry pastry) {
-        pastryRepository.save(pastry);
-        return "redirect:/home";
+        pastryService.addPastry(pastry);
+        return "redirect:/pastries/all";
     }
 }
