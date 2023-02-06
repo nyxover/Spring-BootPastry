@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Entity
 public class Pastry {
@@ -15,10 +18,15 @@ public class Pastry {
     private String name;
 
     private String description;
+@DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date date;
 
-    public Pastry(String name, String description) {
+
+
+    public Pastry(String name, String description, Date date) {
         this.name = name;
         this.description = description;
+        this.date = date;
     }
 
     public Long getId() {
@@ -29,6 +37,9 @@ public class Pastry {
     }
     public String getDescription() {
         return description;
+    }
+    public Date getDate() {
+        return date;
     }
 
     public void setId(Long id) {
@@ -43,6 +54,9 @@ public class Pastry {
         this.description = description;
     }
 
+    public void setDate(Date date) {
+        this.date = date;
+    }
     public Pastry() {
     }
 
