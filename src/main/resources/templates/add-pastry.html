@@ -25,6 +25,16 @@
         <input id="dateInput" type="date" th:field="*{date}">
     </div>
     <div class="mb-3">
+        <label for="ingredient">Ingredients:</label>
+        <br>
+        <div th:each="ingredient : ${ingredients}">
+            <input type="checkbox" id="ingredient" th:field="*{ingredients}" th:value="${ingredient.id}">
+            <label th:for="ingredient" th:text="${ingredient.name}"></label>
+            <br>
+        </div>
+    </div>
+
+    <div class="mb-3">
         <input type="submit" value="Add">
     </div>
 </form>

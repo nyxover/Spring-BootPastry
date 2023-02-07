@@ -28,11 +28,16 @@
                     <td th:text="${pastry.name}"></td>
                     <td th:text="${pastry.description}"></td>
                     <td th:text="${#dates.format(pastry.date, 'dd/MM/yyyy')}"></td>
-
-
                 </tr>
                 </tbody>
             </table>
+
+            <form th:action="@{/search}" method="get">
+                <input type="text" name="searchTerm">
+                <input type="submit" value="Search">
+            </form>
+
+
             <nav>
                 <a th:href="@{/pastries/all}">Home</a>
                 <a th:href="@{/pastries/add}">Add Pastry</a>

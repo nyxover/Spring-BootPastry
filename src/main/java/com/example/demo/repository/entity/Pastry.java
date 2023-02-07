@@ -1,12 +1,10 @@
 package com.example.demo.repository.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Pastry {
@@ -22,6 +20,18 @@ public class Pastry {
     private Date date;
 
 
+
+
+    @OneToMany(mappedBy = "pastry")
+    private List<Ingredient> ingredients;
+
+    public List<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public Pastry(String name, String description, Date date) {
         this.name = name;
