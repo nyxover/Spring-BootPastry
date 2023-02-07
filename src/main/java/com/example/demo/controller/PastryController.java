@@ -5,9 +5,12 @@ import com.example.demo.service.IngredientService;
 import com.example.demo.service.PastryService;
 import com.example.demo.service.dto.IngredientDto;
 import com.example.demo.service.dto.PastryDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +26,9 @@ public class PastryController {
     private PastryService pastryService;
     @Autowired
     private IngredientService ingredientService;
+
+    @Autowired
+    private Validator validator;
     @GetMapping("/all")
     public String displayAllPastries(Model model) {
         List<PastryDto> pastryList = pastryService.fetchPastries();
@@ -59,7 +65,10 @@ public class PastryController {
         return "redirect:home";
     }*/
     @PostMapping("/add")
-    public String addPastryFormSubmission(Pastry pastry) {
+    public String addPastryFormSubmission(@Valid Pastry pastry, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
+            return "add-pastry";
+        }
         pastryService.addPastry(pastry);
         return "redirect:/pastries/all";
     }

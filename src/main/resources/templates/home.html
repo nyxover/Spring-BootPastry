@@ -19,6 +19,7 @@
                         <th>#</th>
                         <th>Name</th>
                         <th>Description</th>
+                        <th>Ingredients</th>
                         <th>Date</th>
                     </tr>
                 </thead>
@@ -27,6 +28,7 @@
                     <td th:text="${pastry.id}"></td>
                     <td th:text="${pastry.name}"></td>
                     <td th:text="${pastry.description}"></td>
+                    <td th:text="${pastry.ingredients}"></td>
                     <td th:text="${#dates.format(pastry.date, 'dd/MM/yyyy')}"></td>
                 </tr>
                 </tbody>

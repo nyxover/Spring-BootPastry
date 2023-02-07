@@ -1,6 +1,7 @@
 package com.example.demo.repository.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ public class Pastry {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+@NotNull
     private String name;
 
     private String description;

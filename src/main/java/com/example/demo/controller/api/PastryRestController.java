@@ -16,6 +16,7 @@ public class PastryRestController {
     @Autowired
     private PastryRepository pastryRepository;
 
+
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Pastry> displayAllPastries() {
         List<Pastry> pastryList = (List<Pastry>) pastryRepository.findAll();
